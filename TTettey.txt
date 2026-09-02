@@ -1,0 +1,7 @@
+Name: T Tettey
+Module: Software Development 2
+Project: SD2 Practical Coursework
+
+This is my personal file for the Git and Version Control exercise.
+It was created, staged, and committed using Git on my local machine,
+then pushed to my GitHub repository at https://github.com/T-Tettey2/sd2
