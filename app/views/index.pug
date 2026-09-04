@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= heading
+  p This page is rendered using the Pug templating engine.
+  h2 Technologies used in this project
+  ul
+    each item in items
+      li= item

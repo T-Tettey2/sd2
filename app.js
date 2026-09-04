@@ -1,6 +1,8 @@
 const express = require('express');
 
 const app = express();
+app.set('view engine', 'pug');
+app.set('views', './app/views');
 const port = 3000;
 
 const mysql = require('mysql2');
@@ -13,7 +15,11 @@ const pool = mysql.createPool({
 });
 
 app.get('/', function (req, res) {
-  res.send('hello T Tettey');
+  res.render('index', {
+    pageTitle: 'T Tettey - SD2 Pug',
+    heading: 'Welcome to my Pug page',
+    items: ['HTML', 'Express', 'Docker', 'Pug', 'MySQL']
+  });
 });
 
 app.listen(port, function () {
