@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= heading
+  table(border="1" cellpadding="8" cellspacing="0")
+    tr
+      th ID
+      th Name
+    each record in records
+      tr
+        td= record.id
+        td= record.name

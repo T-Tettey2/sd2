@@ -67,3 +67,19 @@ app.get('/db_test/:id', function (req, res) {
     );
   });
 });
+
+app.get('/db_test', function (req, res) {
+  pool.query('SELECT * FROM test_table', function (err, results) {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Database error');
+      return;
+    }
+
+    res.render('db', {
+      pageTitle: 'T Tettey - SD2 Database',
+      heading: 'All Records',
+      records: results
+    });
+  });
+});
