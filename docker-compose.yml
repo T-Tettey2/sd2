@@ -1,0 +1,46 @@
+services:
+  web:
+    build: .
+    container_name: sd2_web
+    command: npx nodemon --legacy-watch app.js
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=rootpass
+      - DB_NAME=sd2db
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: sd2_db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_DATABASE=sd2db
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - sd2_db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: sd2_phpmyadmin
+    restart: always
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=rootpass
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+volumes:
+  sd2_db_data:
